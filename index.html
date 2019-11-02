@@ -16,18 +16,21 @@
     <section class="main-section">
       <form action="index.html" method="post">
         <div class="input-div">
-          <div class="">
-          <input class="player-one-input player-inputs" type="text" name="Player 1" value="">
+          <div>
+          <input class="player-one-input player-inputs" type="text" maxlength="32">
           <label>PLAYER 1</label>
+          <p class="error-msg" id="error">Please enter name.</p>
           </div>
-          <div class="">
-          <input class="player-two-input player-inputs" type="text" name="Player 2" value="">
+          <div>
+          <input class="player-two-input player-inputs" type="text" disabled>
           <label>PLAYER 2</label>
           </div>
         </div>
-          <button class="play-btn" type="button" name="button">PLAY GAME</button>
       </form>
     </section>
+    <div class="play-div">
+      <button class="play-btn" type="button" name="button">PLAY GAME</button>
+    </div>
   </body>
 </html>
 <script type="text/javascript" src='card.js'></script>

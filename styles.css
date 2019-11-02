@@ -6,7 +6,6 @@
 }
 
 body {
-  /* display: grid; */
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
@@ -15,6 +14,7 @@ body {
   background-size: cover;
 }
 
+/* Main Page */
 .header {
   background-color: #ffffff;
   height: 60px;
@@ -37,7 +37,8 @@ body {
 
 .title {
   color: black;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin-top: 0px;
   padding-top: 1%;
 }
@@ -67,8 +68,32 @@ form {
 }
 
 .play-btn {
-  width: 100%;
+  width: 50%;
   background-color: black;
   color: white;
   height: 40px;
+}
+
+.play-div {
+  display: flex;
+  justify-content: center;
+}
+
+#error {
+  color: red;
+}
+
+.error-msg {
+  display: none;  
+}
+
+/* Page Two */
+.directions-div {
+  text-align: center;
+  margin-left: 25.1%;
+  margin-right: 25.1%;
+}
+
+.directions-p {
+  text-align: left;
 }
