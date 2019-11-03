@@ -67,11 +67,12 @@ form {
   font-size: 25px;
 }
 
-.play-btn {
+#play-btn, #second-btn {
   width: 50%;
   background-color: black;
   color: white;
   height: 40px;
+  width: 100%;
 }
 
 .play-div {
@@ -84,7 +85,7 @@ form {
 }
 
 .error-msg {
-  display: none;  
+  display: none;
 }
 
 /* Page Two */
@@ -96,4 +97,109 @@ form {
 
 .directions-p {
   text-align: left;
+}
+
+/* Game Page */
+main {
+  display: grid;
+  grid-template-columns: 15% 75%;
+}
+.game-info {
+  margin-top: 50px;
+  background-color: black;
+  color: white;
+  height: 600px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+#line {
+  border-bottom: 2px solid #ffffff;
+  margin: 6px;
+  margin-bottom: 30px;
+}
+
+.card-container {
+  margin-left: 200px;
+  /* margin-top: 50px; */
+  /* display: grid; */
+  /* grid-template-rows: 33% 33% 33%;  */
+  /* grid-template-columns: 33% 33% 33%; */
+  /* grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%; */
+}
+
+.card {
+  height: 150px;
+  width: 100px;
+  border: 5px solid #000000;
+  background-color: purple;
+  margin: 15px;
+}
+
+.row1 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.row2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.row3 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card1 {
+  transform: rotate(-15deg);
+
+}
+
+.card2 {
+  transform: rotate(-10deg);
+
+}
+
+.card3 {
+  transform: rotate(20deg);
+
+}
+
+.card4 {
+  transform: rotate(30deg);
+
+}
+
+.card5 {
+  transform: rotate(10deg);
+
+}
+
+.card6 {
+  transform: rotate(-3deg);
+
+}
+
+.card7 {
+  transform: rotate(10deg);
+
+}
+
+.card8 {
+  transform: rotate(-30deg);
+
+}
+
+.card9 {
+  transform: rotate(23deg);
+
+}
+
+.card10 {
+  transform: rotate(16deg);
+
 }
