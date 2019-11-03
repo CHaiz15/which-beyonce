@@ -5,6 +5,11 @@ var playerOneInput = document.querySelector('.player-one-input');
 var inputError = document.querySelector('#error');
 var inputDiv = document.querySelector('.input-div');
 
+
+function flipCard() {
+  this.classList.toggle('flipped');
+}
+
 // playBtn.addEventListener('click', openDirections);
 // playBtn.addEventListener('click', openGame);
 window.addEventListener('load', openGame);
@@ -31,7 +36,8 @@ function openDirections() {
 }
 
 function openGame() {
-  mainSection.style.marginTop = '25px';
+  mainSection.classList.add('game-page');
+  mainSection.style.justifyContent = 'flex-start';
   mainSection.innerHTML = `<section class="game-info">
     <h3 id="line">NAME</h3>
     <h3>MATCHES THIS ROUND</h3>
@@ -41,29 +47,41 @@ function openGame() {
   <section class="card-container">
     <section class="row1">
       <div class="card card1">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
       <div class="card card2">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
       <div class="card card3">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
     </section>
     <section class="row2">
       <div class="card card4">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
       <div class="card card5">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
       <div class="card card6">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
       <div class="card card7">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
     </section>
     <section class="row3">
       <div class="card card8">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
       <div class="card card9">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
       <div class="card card10">
+      <img class="front-face" src="./assets/questionMark.jpg">
       </div>
     </section>
   </section>`
+  var cards = document.querySelectorAll('.card');
+  cards.forEach(card => card.addEventListener('click', flipCard));
 }

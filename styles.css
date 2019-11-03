@@ -100,16 +100,16 @@ form {
 }
 
 /* Game Page */
-main {
-  display: grid;
-  grid-template-columns: 15% 75%;
+.game-page {
+  margin-top: 25px;
+  display: flex;
 }
+
 .game-info {
-  margin-top: 50px;
   background-color: black;
   color: white;
   height: 600px;
-  margin-left: 10px;
+  margin-left: 20px;
   text-align: center;
 }
 
@@ -121,23 +121,28 @@ main {
 
 .card-container {
   margin-left: 200px;
-  /* margin-top: 50px; */
-  /* display: grid; */
-  /* grid-template-rows: 33% 33% 33%;  */
-  /* grid-template-columns: 33% 33% 33%; */
-  /* grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 20% 20% 20% 20% 20%; */
+  perspective: 1000px;
 }
 
 .card {
   height: 150px;
   width: 100px;
-  border: 5px solid #000000;
-  background-color: purple;
-  margin: 15px;
+  border: 5px solid purple;
+  margin: 20px;
+  transform-style: preserve-3d;
+  transition: transform .5s;
 }
 
-.row1 {
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.front-face {
+  height: 100%;
+  width: 100%;
+}
+
+.row1, .row3 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -148,12 +153,6 @@ main {
   justify-content: space-around;
 }
 
-.row3 {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
 .card1 {
   transform: rotate(-15deg);
 
@@ -161,7 +160,7 @@ main {
 
 .card2 {
   transform: rotate(-10deg);
-
+  background-image: url(./assets/beyonce-COB-bw.png);
 }
 
 .card3 {
