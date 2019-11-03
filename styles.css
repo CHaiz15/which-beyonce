@@ -67,11 +67,12 @@ form {
   font-size: 25px;
 }
 
-.play-btn {
+#play-btn, #second-btn {
   width: 50%;
   background-color: black;
   color: white;
   height: 40px;
+  width: 100%;
 }
 
 .play-div {
@@ -84,7 +85,7 @@ form {
 }
 
 .error-msg {
-  display: none;  
+  display: none;
 }
 
 /* Page Two */
@@ -96,4 +97,114 @@ form {
 
 .directions-p {
   text-align: left;
+}
+
+/* Game Page */
+.game-page {
+  margin-top: 25px;
+  display: flex;
+}
+
+.game-info {
+  background-color: black;
+  color: white;
+  height: 600px;
+  margin-left: 20px;
+  text-align: center;
+}
+
+#line {
+  border-bottom: 2px solid #ffffff;
+  margin: 6px;
+  margin-bottom: 30px;
+}
+
+.card-container {
+  margin-left: 200px;
+  perspective: 1000px;
+}
+
+.card {
+  height: 150px;
+  width: 100px;
+  border: 5px solid purple;
+  margin: 20px;
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  position: relative;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.front-card, .back-card {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.back-card {
+  transform: rotateY(180deg);
+}
+
+.row1, .row3 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.row2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card1 {
+  transform: rotate(-15deg);
+
+}
+
+.card2 {
+  transform: rotate(-10deg);
+}
+
+.card3 {
+  transform: rotate(20deg);
+
+}
+
+.card4 {
+  transform: rotate(30deg);
+
+}
+
+.card5 {
+  transform: rotate(10deg);
+
+}
+
+.card6 {
+  transform: rotate(-3deg);
+
+}
+
+.card7 {
+  transform: rotate(10deg);
+
+}
+
+.card8 {
+  transform: rotate(-30deg);
+
+}
+
+.card9 {
+  transform: rotate(23deg);
+
+}
+
+.card10 {
+  transform: rotate(16deg);
+
 }
