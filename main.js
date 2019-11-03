@@ -47,38 +47,48 @@ function openGame() {
   <section class="card-container">
     <section class="row1">
       <div class="card card1">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
       <div class="card card2">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
       <div class="card card3">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
     </section>
     <section class="row2">
       <div class="card card4">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
       <div class="card card5">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
       <div class="card card6">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
       <div class="card card7">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
     </section>
     <section class="row3">
       <div class="card card8">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
       <div class="card card9">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
       <div class="card card10">
-      <img class="front-face" src="./assets/questionMark.jpg">
+      <img class="front-card" src="./assets/questionMark.jpg">
+      <img class="back-card" src="./assets/bey1.jpg">
       </div>
     </section>
   </section>`

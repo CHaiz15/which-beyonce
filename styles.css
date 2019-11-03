@@ -131,15 +131,22 @@ form {
   margin: 20px;
   transform-style: preserve-3d;
   transition: transform .5s;
+  position: relative;
 }
 
 .card.flipped {
   transform: rotateY(180deg);
 }
 
-.front-face {
+.front-card, .back-card {
   height: 100%;
   width: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.back-card {
+  transform: rotateY(180deg);
 }
 
 .row1, .row3 {
@@ -160,7 +167,6 @@ form {
 
 .card2 {
   transform: rotate(-10deg);
-  background-image: url(./assets/beyonce-COB-bw.png);
 }
 
 .card3 {
