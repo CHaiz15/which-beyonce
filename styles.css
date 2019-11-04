@@ -128,7 +128,8 @@ form {
 .card {
   height: 150px;
   width: 100px;
-  border: 5px solid purple;
+  border: 3px solid purple;
+  border-radius: 2px;
   margin: 20px;
   transform-style: preserve-3d;
   transition: transform .5s;

@@ -5,49 +5,32 @@ var cardContainer = document.querySelector('.card-container');
 var playerOneInput = document.querySelector('.player-one-input');
 var inputError = document.querySelector('#error');
 var inputDiv = document.querySelector('.input-div');
-var row1 = document.querySelector('.row1');
-var row2 = document.querySelector('.row2');
-var row3 = document.querySelector('.row3');
 var flippedCard = false;
 var firstCard;
 var secondCard;
 var matchesThisRound = 0;
 var deck = new Deck();
-var cardID = 0;
+var matchInfo = 0;
 
 directionBtn.addEventListener('click', openDirections);
 
 function instantiateCards() {
   for (var i = 0; i < 10; i++) {
-  cardID++;
-  if (cardID === 6) {
-    cardID = 1;
+  matchInfo++;
+  if (matchInfo === 6) {
+    matchInfo = 1;
   }
-  var newCard = new Card(cardID);
+  var newCard = new Card(matchInfo, i);
   deck.cards.push(newCard);
-  // appendCard(newCard);
   mainSection.innerHTML += `
-  <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}">
+  <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
   <img class="back-card" src="./assets/questionMark.jpg">
   <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
   </div>`
-
-  // console.log(deck.cards[i].matchInfo);
-  // if (deck.cards[i].matchInfo === 6) {
-  //   deck.cards[i].matchInfo = 1;
-  // }
   var cards = document.querySelectorAll('.card');
   cards.forEach(card => card.addEventListener('click', flipCard));
   }
 }
-
-// function appendCard() {
-//   mainSection.innerHTML += `
-//   <div class="card card${deck.cards[0].matchInfo}" data-name="${deck.cards.matchInfo}">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey${deck.cards.matchInfo}.jpg">
-//   </div>`
-// }
 
 function openDirections() {
   event.preventDefault();
@@ -77,52 +60,61 @@ function startGame() {
 }
 
 function openGame(card) {
-  console.log(matchesThisRound);
   mainSection.classList.add('game-page');
   mainSection.style.justifyContent = 'flex-start';
   mainSection.innerHTML = `<section class="game-info">
     <h3 id="line">${playerOneInput.value}</h3>
     <h3>MATCHES THIS ROUND</h3>
-    <h1 id="line">${matchesThisRound.value}</h1>
+    <h1 id="line">${matchesThisRound}</h1>
     <h3>GAME WINS</h3>
   </section>
   <section class="card-container">
-    <section class="row1">
 
-    </section>
-    <section class="row2">
-
-    </section>
-    <section class="row3">
-
-    </section>
   </section>`
   instantiateCards();
 }
 
-function flipCard() {
+function flipCard(event) {
+  var clickedCard = parseInt(event.target.parentNode.dataset.id);
+  console.log(clickedCard);
   this.classList.add('flipped');
   if (!flippedCard) {
     flippedCard = true;
     firstCard = this;
-    console.log(firstCard);
+    console.log(firstCard, 'one');
+    deck.selectCard(clickedCard);
+    return;
   } else {
     flippedCard = false;
     secondCard = this;
-    console.log(secondCard);
+    console.log(secondCard, 'two');
   }
+  checkIfMatch();
+}
+
+function checkIfMatch() {
+  console.log('test');
   if (firstCard.dataset.name === secondCard.dataset.name) {
-    console.log(firstCard.dataset.name, secondCard.dataset.name)
-    firstCard.removeEventListener('click', flipCard);
-    secondCard.removeEventListener('click', flipCard);
+    deleteMatches();
     matchesThisRound += 1;
     console.log(matchesThisRound);
   } else {
-    setTimeout(() => {
-      firstCard.classList.remove('flipped');
-      secondCard.classList.remove('flipped');
-    }, 1500);
+    reverseFlip();
   }
+}
+
+function deleteMatches() {
+setTimeout(() => {
+  firstCard.remove();
+  secondCard.remove();
+  }, 1500);
+}
+
+function reverseFlip() {
+  setTimeout(() => {
+    firstCard.classList.remove('flipped');
+    secondCard.classList.remove('flipped');
+  }, 1500);
 }
 
 
