@@ -67,7 +67,7 @@ form {
   font-size: 25px;
 }
 
-#play-btn, #second-btn {
+#direction-btn, #play-btn {
   width: 50%;
   background-color: black;
   color: white;
@@ -75,7 +75,7 @@ form {
   width: 100%;
 }
 
-.play-div {
+.direction-div {
   display: flex;
   justify-content: center;
 }
@@ -103,6 +103,7 @@ form {
 .game-page {
   margin-top: 25px;
   display: flex;
+  /* flex-wrap: wrap; */
 }
 
 .game-info {
@@ -127,7 +128,8 @@ form {
 .card {
   height: 150px;
   width: 100px;
-  border: 5px solid purple;
+  border: 3px solid purple;
+  border-radius: 2px;
   margin: 20px;
   transform-style: preserve-3d;
   transition: transform .5s;
@@ -145,7 +147,7 @@ form {
   backface-visibility: hidden;
 }
 
-.back-card {
+.front-card {
   transform: rotateY(180deg);
 }
 
