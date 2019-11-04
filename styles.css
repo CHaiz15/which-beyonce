@@ -103,6 +103,7 @@ form {
 .game-page {
   margin-top: 25px;
   display: flex;
+  /* flex-wrap: wrap; */
 }
 
 .game-info {

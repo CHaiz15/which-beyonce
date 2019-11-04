@@ -1,9 +1,13 @@
 var directionBtn = document.querySelector('#direction-btn');
 var secondBtn = document.querySelector('#second-btn');
-var mainSection = document.querySelector('.main-section')
+var mainSection = document.querySelector('.main-section');
+var cardContainer = document.querySelector('.card-container');
 var playerOneInput = document.querySelector('.player-one-input');
 var inputError = document.querySelector('#error');
 var inputDiv = document.querySelector('.input-div');
+var row1 = document.querySelector('.row1');
+var row2 = document.querySelector('.row2');
+var row3 = document.querySelector('.row3');
 var flippedCard = false;
 var firstCard;
 var secondCard;
@@ -14,8 +18,11 @@ var cardID = 0;
 directionBtn.addEventListener('click', openDirections);
 
 function instantiateCards() {
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 10; i++) {
   cardID++;
+  if (cardID === 6) {
+    cardID = 1;
+  }
   var newCard = new Card(cardID);
   deck.cards.push(newCard);
   // appendCard(newCard);
@@ -24,6 +31,11 @@ function instantiateCards() {
   <img class="back-card" src="./assets/questionMark.jpg">
   <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
   </div>`
+
+  // console.log(deck.cards[i].matchInfo);
+  // if (deck.cards[i].matchInfo === 6) {
+  //   deck.cards[i].matchInfo = 1;
+  // }
   var cards = document.querySelectorAll('.card');
   cards.forEach(card => card.addEventListener('click', flipCard));
   }
@@ -75,12 +87,16 @@ function openGame(card) {
     <h3>GAME WINS</h3>
   </section>
   <section class="card-container">
-    <section class=>
+    <section class="row1">
+
+    </section>
+    <section class="row2">
+
+    </section>
+    <section class="row3">
+
     </section>
   </section>`
-  // var cards = document.querySelectorAll('.card');
-  // cards.forEach(card => card.addEventListener('click', flipCard));
-  instantiateCards();
   instantiateCards();
 }
 
