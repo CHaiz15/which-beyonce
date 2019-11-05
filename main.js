@@ -12,7 +12,7 @@ var deck = new Deck();
 var matchInfo = 0;
 var cards = document.querySelectorAll('.card');
 
-
+// window.addEventListener('load', endGameOptions);
 directionBtn.addEventListener('click', openDirections);
 
 function openDirections() {
@@ -100,6 +100,7 @@ function instantiateCards() {
 
 function flipCard(event) {
   var clickedCard = parseInt(event.target.parentNode.dataset.id);
+  console.log(clickedCard);
   if (deck.selectedCards.length === 2) {
     return;
   }
@@ -108,18 +109,19 @@ function flipCard(event) {
     flippedCard = true;
     firstCard = this;
     firstCard.removeEventListener('click', flipCard);
-    deck.selectCard(clickedCard);
+    deck.checkSelectedCards(clickedCard);
     return;
   } else {
     flippedCard = false;
     secondCard = this;
     secondCard.removeEventListener('click', flipCard);
-    deck.selectCard(clickedCard);
+    deck.checkSelectedCards(clickedCard);
   }
   checkIfMatch();
 }
 
 function checkIfMatch() {
+  deck.moveToMatched();
   if (firstCard.dataset.name === secondCard.dataset.name) {
     deleteMatches();
     matchesThisRound += 1;
@@ -134,9 +136,9 @@ function checkIfMatch() {
 
 function deleteMatches() {
   setTimeout(() => {
-  firstCard.remove();
-  secondCard.remove();
-  deck.selectedCards = [];
+    firstCard.remove();
+    secondCard.remove();
+    deck.selectedCards = [];
   }, 1500);
 }
 
@@ -146,4 +148,21 @@ function reverseFlip() {
     secondCard.classList.remove('flipped');
     deck.selectedCards = [];
   }, 1500);
+}
+
+function endGameOptions() {
+  mainSection.style.justifyContent = '';
+  mainSection.style.marginTop = '50px';
+  mainSection.innerHTML = `
+  <section class="end-section">
+  <div class="congrats">
+  <h1>Congratulations ${playerOneInput.value}!</h1>
+  <h3>It took you a long time.</h3>
+  <h4>Click below to play again!</h4>
+  </div>
+  <div class="start-over">
+    <button class="restart-btn" type="button" name="button">RESTART</button>
+    <button class="new-game-btn" type="button" name="button">NEW GAME</button>
+  </div>
+  </section>`;
 }

@@ -166,7 +166,6 @@ form {
 
 .card1 {
   transform: rotate(-15deg);
-
 }
 
 .card2 {
@@ -175,40 +174,61 @@ form {
 
 .card3 {
   transform: rotate(20deg);
-
 }
 
 .card4 {
   transform: rotate(30deg);
-
 }
 
 .card5 {
   transform: rotate(10deg);
-
 }
 
 .card6 {
   transform: rotate(-3deg);
-
 }
 
 .card7 {
   transform: rotate(10deg);
-
 }
 
 .card8 {
   transform: rotate(-30deg);
-
 }
 
 .card9 {
   transform: rotate(23deg);
-
 }
 
 .card10 {
   transform: rotate(16deg);
+}
 
+/* End Game */
+.end-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.congrats {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.congrats h1{
+  font-size: 40px;
+}
+
+.congrats h3{
+  font-size: 25px;
+}
+
+.restart-btn, .new-game-btn {
+  background-color: black;
+  color: white;
+  width: 300px;
+  height: 40px;
+  margin: 20px;
 }
