@@ -12,7 +12,6 @@ var deck = new Deck();
 var matchInfo = 0;
 var cards = document.querySelectorAll('.card');
 
-// window.addEventListener('load', endGameOptions);
 directionBtn.addEventListener('click', openDirections);
 
 function openDirections() {
@@ -71,30 +70,37 @@ function instantiateCards() {
   }
   var newCard = new Card(matchInfo, i);
   deck.cards.push(newCard);
+  }
+  showCards();
+}
+
+function showCards() {
+  deck.shuffle(deck.cards);
+for (var i = 0; i < deck.cards.length; i++) {
   var row1 = document.querySelector('.row1');
   var row2 = document.querySelector('.row2');
   var row3 = document.querySelector('.row3');
   if (i < 3) {
     row1.innerHTML += `
-    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
+    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
     <img class="back-card" src="./assets/questionMark.jpg">
     <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
     </div>`
   } else if (i < 7) {
     row2.innerHTML += `
-    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
+    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
     <img class="back-card" src="./assets/questionMark.jpg">
     <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
     </div>`
   } else if (i < 10) {
     row3.innerHTML += `
-    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
+    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
     <img class="back-card" src="./assets/questionMark.jpg">
     <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
     </div>`
   }
-  var cards = document.querySelectorAll('.card');
-  cards.forEach(card => card.addEventListener('click', flipCard));
+    var cards = document.querySelectorAll('.card');
+    cards.forEach(card => card.addEventListener('click', flipCard));
   }
 }
 
@@ -109,19 +115,18 @@ function flipCard(event) {
     flippedCard = true;
     firstCard = this;
     firstCard.removeEventListener('click', flipCard);
-    deck.checkSelectedCards(clickedCard);
+    deck.selectCards(clickedCard);
     return;
   } else {
     flippedCard = false;
     secondCard = this;
     secondCard.removeEventListener('click', flipCard);
-    deck.checkSelectedCards(clickedCard);
+    deck.selectCards(clickedCard);
   }
   checkIfMatch();
 }
 
 function checkIfMatch() {
-  deck.moveToMatched();
   if (firstCard.dataset.name === secondCard.dataset.name) {
     deleteMatches();
     matchesThisRound += 1;
@@ -132,13 +137,17 @@ function checkIfMatch() {
     secondCard.addEventListener('click', flipCard);
     reverseFlip();
   }
+
 }
 
 function deleteMatches() {
   setTimeout(() => {
-    firstCard.remove();
-    secondCard.remove();
-    deck.selectedCards = [];
+    firstCard.classList.add('card-hide');
+    secondCard.classList.add('card-hide');
+    deck.checkSelectedCards();
+    if (deck.matchedCards.length === 10) {
+      endGameOptions();
+    }
   }, 1500);
 }
 
@@ -146,7 +155,7 @@ function reverseFlip() {
   setTimeout(() => {
     firstCard.classList.remove('flipped');
     secondCard.classList.remove('flipped');
-    deck.selectedCards = [];
+    deck.checkSelectedCards();
   }, 1500);
 }
 

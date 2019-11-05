@@ -5,6 +5,6 @@ class Card {
     this.id = id;
   }
   match() {
-
+    this.matched = true;
   }
 }

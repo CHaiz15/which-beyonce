@@ -5,25 +5,34 @@ class Deck {
     this.selectedCards = [];
     this.matches = 0;
   }
-  shuffle() {
-
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
   }
-  checkSelectedCards(clickedCard) {
+  selectCards(clickedCard) {
     for (var i = 0; i < this.cards.length; i++) {
     if (this.cards[i].id === clickedCard) {
       this.selectedCards.push(this.cards[i]);
     }
   }
 }
-  moveToMatched() {
+  checkSelectedCards() {
     if (this.selectedCards[0].matchInfo === this.selectedCards[1].matchInfo) {
-      this.matchedCards.push(this.selectedCards[0], this.selectedCards[1]);
+      this.moveToMatched();
+      this.selectedCards = [];
     }
-    for (var i = 0; i < this.matchedCards.length; i++) {
-      this.matchedCards[i].matched = true;
-    }
-    if (this.matchedCards.length === 10) {
-      endGameOptions();
-    }
+    this.selectedCards = [];
   }
+  moveToMatched() {
+     for (var i = 0; i < this.selectedCards.length; i++) {
+        this.matchedCards.push(this.selectedCards[i]);
+        this.selectedCards[i].match();
+    }
+}
 }

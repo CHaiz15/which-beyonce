@@ -204,6 +204,10 @@ form {
   transform: rotate(16deg);
 }
 
+.card-hide {
+  display: none;
+}
+
 /* End Game */
 .end-section {
   display: flex;
