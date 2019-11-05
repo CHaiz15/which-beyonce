@@ -41,6 +41,7 @@ body {
   justify-content: center;
   margin-top: 0px;
   padding-top: 1%;
+  padding-right: 5%;
 }
 
 .main-section {
@@ -73,6 +74,9 @@ form {
   color: white;
   height: 40px;
   width: 100%;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .direction-div {
@@ -101,9 +105,7 @@ form {
 
 /* Game Page */
 .game-page {
-  margin-top: 25px;
-  display: flex;
-  /* flex-wrap: wrap; */
+  /* display: flex; */
 }
 
 .game-info {

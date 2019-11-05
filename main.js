@@ -1,7 +1,6 @@
 var directionBtn = document.querySelector('#direction-btn');
 var secondBtn = document.querySelector('#second-btn');
 var mainSection = document.querySelector('.main-section');
-var cardContainer = document.querySelector('.card-container');
 var playerOneInput = document.querySelector('.player-one-input');
 var inputError = document.querySelector('#error');
 var inputDiv = document.querySelector('.input-div');
@@ -11,26 +10,10 @@ var secondCard;
 var matchesThisRound = 0;
 var deck = new Deck();
 var matchInfo = 0;
+var cards = document.querySelectorAll('.card');
+
 
 directionBtn.addEventListener('click', openDirections);
-
-function instantiateCards() {
-  for (var i = 0; i < 10; i++) {
-  matchInfo++;
-  if (matchInfo === 6) {
-    matchInfo = 1;
-  }
-  var newCard = new Card(matchInfo, i);
-  deck.cards.push(newCard);
-  mainSection.innerHTML += `
-  <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
-  <img class="back-card" src="./assets/questionMark.jpg">
-  <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
-  </div>`
-  var cards = document.querySelectorAll('.card');
-  cards.forEach(card => card.addEventListener('click', flipCard));
-  }
-}
 
 function openDirections() {
   event.preventDefault();
@@ -62,51 +45,98 @@ function startGame() {
 function openGame(card) {
   mainSection.classList.add('game-page');
   mainSection.style.justifyContent = 'flex-start';
+  mainSection.style.marginTop = '30px';
   mainSection.innerHTML = `<section class="game-info">
     <h3 id="line">${playerOneInput.value}</h3>
-    <h3>MATCHES THIS ROUND</h3>
-    <h1 id="line">${matchesThisRound}</h1>
+    <h3 >MATCHES THIS ROUND</h3>
+    <h1 id="line" class="matches-round">0</h1>
     <h3>GAME WINS</h3>
   </section>
   <section class="card-container">
-
+    <section class='row1'>
+    </section>
+    <section class='row2'>
+    </section>
+    <section class='row3'>
+    </section>
   </section>`
   instantiateCards();
 }
 
+function instantiateCards() {
+  for (var i = 0; i < 10; i++) {
+  matchInfo++;
+  if (matchInfo === 6) {
+    matchInfo = 1;
+  }
+  var newCard = new Card(matchInfo, i);
+  deck.cards.push(newCard);
+  var row1 = document.querySelector('.row1');
+  var row2 = document.querySelector('.row2');
+  var row3 = document.querySelector('.row3');
+  if (i < 3) {
+    row1.innerHTML += `
+    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
+    <img class="back-card" src="./assets/questionMark.jpg">
+    <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
+    </div>`
+  } else if (i < 7) {
+    row2.innerHTML += `
+    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
+    <img class="back-card" src="./assets/questionMark.jpg">
+    <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
+    </div>`
+  } else if (i < 10) {
+    row3.innerHTML += `
+    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${i}">
+    <img class="back-card" src="./assets/questionMark.jpg">
+    <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
+    </div>`
+  }
+  var cards = document.querySelectorAll('.card');
+  cards.forEach(card => card.addEventListener('click', flipCard));
+  }
+}
+
 function flipCard(event) {
   var clickedCard = parseInt(event.target.parentNode.dataset.id);
-  console.log(clickedCard);
-  this.classList.add('flipped');
+  if (deck.selectedCards.length === 2) {
+    return;
+  }
+    this.classList.add('flipped');
   if (!flippedCard) {
     flippedCard = true;
     firstCard = this;
-    console.log(firstCard, 'one');
+    firstCard.removeEventListener('click', flipCard);
     deck.selectCard(clickedCard);
     return;
   } else {
     flippedCard = false;
     secondCard = this;
-    console.log(secondCard, 'two');
+    secondCard.removeEventListener('click', flipCard);
+    deck.selectCard(clickedCard);
   }
   checkIfMatch();
 }
 
 function checkIfMatch() {
-  console.log('test');
   if (firstCard.dataset.name === secondCard.dataset.name) {
     deleteMatches();
     matchesThisRound += 1;
-    console.log(matchesThisRound);
+    var roundMatches = document.querySelector('.matches-round');
+    roundMatches.innerHTML = matchesThisRound;
   } else {
+    firstCard.addEventListener('click', flipCard);
+    secondCard.addEventListener('click', flipCard);
     reverseFlip();
   }
 }
 
 function deleteMatches() {
-setTimeout(() => {
+  setTimeout(() => {
   firstCard.remove();
   secondCard.remove();
+  deck.selectedCards = [];
   }, 1500);
 }
 
@@ -114,57 +144,6 @@ function reverseFlip() {
   setTimeout(() => {
     firstCard.classList.remove('flipped');
     secondCard.classList.remove('flipped');
+    deck.selectedCards = [];
   }, 1500);
 }
-
-
-
-
-
-
-// <section class="row1">
-//   <div class="card card1" data-name="bey1">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey1.jpg">
-//   </div>
-//   <div class="card card2" data-name="bey2">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey2.jpg">
-//   </div>
-//   <div class="card card3" data-name="bey3">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey3.jpg">
-//   </div>
-// </section>
-// <section class="row2">
-//   <div class="card card4" data-name="bey4">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey4.jpg">
-//   </div>
-//   <div class="card card5" data-name="bey5">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey5.jpg">
-//   </div>
-//   <div class="card card6" data-name="bey1">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey1.jpg">
-//   </div>
-//   <div class="card card7" data-name="bey2">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey2.jpg">
-//   </div>
-// </section>
-// <section class="row3">
-//   <div class="card card8" data-name="bey3">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey3.jpg">
-//   </div>
-//   <div class="card card9" data-name="bey4">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey4.jpg">
-//   </div>
-//   <div class="card card10" data-name="bey5">
-//   <img class="back-card" src="./assets/questionMark.jpg">
-//   <img class="front-card" src="./assets/bey5.jpg">
-//   </div>
-// </section>

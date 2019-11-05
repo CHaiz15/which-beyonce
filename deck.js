@@ -14,7 +14,7 @@ class Deck {
       this.selectedCards.push(this.cards[i]);
     }
   }
-  checkSelectedCards(clickedCard) {
+  checkSelectedCards() {
 
   }
   moveToMatched() {
