@@ -4,6 +4,8 @@ var mainSection = document.querySelector('.main-section');
 var playerOneInput = document.querySelector('.player-one-input');
 var inputError = document.querySelector('#error');
 var inputDiv = document.querySelector('.input-div');
+var hamburger = document.querySelector('.hamburger');
+var scoreBoard = document.querySelector('.scoreboard');
 var flippedCard = false;
 var firstCard;
 var secondCard;
@@ -14,6 +16,25 @@ var cards = document.querySelectorAll('.card');
 var playerArray = JSON.parse(localStorage.getItem("playerArray")) || [];
 
 directionBtn.addEventListener('click', openDirections);
+hamburger.addEventListener('click', dropDown);
+
+function compare( a, b ) {
+  if ( a.secondsOnly < b.secondsOnly ){
+    return -1;
+  }
+  if ( a.secondsOnly > b.secondsOnly ){
+    return 1;
+  }
+  return 0;
+}
+
+function dropDown() {
+  playerArray.sort(compare);
+  scoreBoard.classList.toggle('show-score');
+  for (var i = 0; i < 5; i++) {
+    scoreBoard.innerHTML += `<p>${playerArray[i].name} ${playerArray[i].time}</p>`;
+  }
+}
 
 var min = 0;
 var second = 00;
@@ -49,7 +70,6 @@ function openDirections() {
       `
   }
   startGame();
-  countUp();
 }
 
 function startGame() {
@@ -120,6 +140,7 @@ for (var i = 0; i < deck.cards.length; i++) {
     var cards = document.querySelectorAll('.card');
     cards.forEach(card => card.addEventListener('click', flipCard));
   }
+  countUp();
 }
 
 function flipCard(event) {
@@ -197,13 +218,20 @@ function displayGamePage() {
     <button class="new-game-btn" type="button" name="button">NEW GAME</button>
   </div>
   </section>`;
+  var newGameBtn = document.querySelector('.new-game-btn');
+  newGameBtn.addEventListener('click', newGame);
 }
 
 function addIdea() {
   var player = new Player({
     name: playerOneInput.value.toUpperCase(),
     time: `${min} min and ${second} sec`,
+    secondsOnly: second,
   });
   playerArray.push(player);
   player.saveToStorage(playerArray);
+}
+
+function newGame() {
+  openDirections();
 }
