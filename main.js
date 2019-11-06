@@ -13,10 +13,21 @@ var matchInfo = 0;
 var cards = document.querySelectorAll('.card');
 var userNameArray = [];
 
-
-var seconds = 00;
-
 directionBtn.addEventListener('click', openDirections);
+
+var min = 0;
+var second = 00;
+var counterId = setInterval(function(){
+countUp();
+}, 1000);
+
+function countUp () {
+  second++;
+  if(second == 59){
+    second = 00;
+    min = min + 1;
+  }
+}
 
 function openDirections() {
   event.preventDefault();
@@ -37,6 +48,7 @@ function openDirections() {
       </div>
       `
   }
+  countUp();
   startGame();
   userNameArray.push(playerOneInput.value);
   saveToStorage();
@@ -178,7 +190,7 @@ function endGameOptions() {
   <section class="end-section">
   <div class="congrats">
   <h1>Congratulations ${playerOneInput.value.toUpperCase()}!</h1>
-  <h3>It took you a long time.</h3>
+  <h3>It took you ${min} min ${second} sec!</h3>
   <h4>Click below to play again!</h4>
   </div>
   <div class="start-over">
