@@ -14,6 +14,11 @@ var deck = new Deck();
 var matchInfo = 0;
 var cards = document.querySelectorAll('.card');
 var playerArray = JSON.parse(localStorage.getItem("playerArray")) || [];
+var min = 0;
+var second = 00;
+var counterId = setInterval(function(){
+countUp();
+}, 1000);
 
 directionBtn.addEventListener('click', openDirections);
 hamburger.addEventListener('click', dropDown);
@@ -35,12 +40,6 @@ function dropDown() {
     scoreBoard.innerHTML += `<p>${playerArray[i].name} ${playerArray[i].time}</p>`;
   }
 }
-
-var min = 0;
-var second = 00;
-var counterId = setInterval(function(){
-countUp();
-}, 1000);
 
 function countUp () {
   second++;
@@ -184,7 +183,9 @@ function deleteMatches() {
     deck.checkSelectedCards();
     if (deck.matchedCards.length === 10) {
       displayGamePage();
-      endGame();
+      addIdea();
+      second = 0;
+      min = 0;
     }
   }, 1200);
 }
@@ -195,12 +196,6 @@ function reverseFlip() {
     secondCard.classList.remove('flipped');
     deck.checkSelectedCards();
   }, 1200);
-}
-
-function endGame() {
-  addIdea();
-  second = 0;
-  min = 0;
 }
 
 function displayGamePage() {
