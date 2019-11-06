@@ -23,7 +23,7 @@ countUp();
 directionBtn.addEventListener('click', openDirections);
 hamburger.addEventListener('click', dropDown);
 
-function compare( a, b ) {
+function compare(a, b) {
   if ( a.secondsOnly < b.secondsOnly ){
     return -1;
   }
@@ -221,7 +221,7 @@ function addIdea() {
   var player = new Player({
     name: playerOneInput.value.toUpperCase(),
     time: `${min} min and ${second} sec`,
-    secondsOnly: second,
+      secondsOnly: second,
   });
   playerArray.push(player);
   player.saveToStorage(playerArray);

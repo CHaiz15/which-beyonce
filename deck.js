@@ -34,5 +34,5 @@ class Deck {
         this.matchedCards.push(this.selectedCards[i]);
         this.selectedCards[i].match();
     }
-}
+  }
 }
