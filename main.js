@@ -69,7 +69,6 @@ function openDirections() {
       </div>
       `
   }
-  countUp();
   startGame();
 }
 
