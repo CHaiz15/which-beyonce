@@ -69,7 +69,6 @@ function openDirections() {
       </div>
       `
   }
-  countUp();
   startGame();
 }
 
@@ -112,7 +111,7 @@ function instantiateCards() {
 }
 
 function showCards() {
-  // deck.shuffle(deck.cards);
+  deck.shuffle(deck.cards);
   var cardNum = 0;
 for (var i = 0; i < deck.cards.length; i++) {
   cardNum++;
