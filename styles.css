@@ -20,6 +20,19 @@ body {
   height: 60px;
 }
 
+.scoreboard {
+  text-align: center;
+  position: absolute;
+  height: 400px;
+  width: 250px;
+  background-color: black;
+  color: white;
+}
+
+.show-score {
+  display: none;
+}
+
 .hamburger {
   background-image: url(./assets/menu.svg);
   background-size: 50px 50px;

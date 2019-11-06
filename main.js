@@ -4,6 +4,8 @@ var mainSection = document.querySelector('.main-section');
 var playerOneInput = document.querySelector('.player-one-input');
 var inputError = document.querySelector('#error');
 var inputDiv = document.querySelector('.input-div');
+var hamburger = document.querySelector('.hamburger');
+var scoreBoard = document.querySelector('.scoreboard');
 var flippedCard = false;
 var firstCard;
 var secondCard;
@@ -11,9 +13,28 @@ var matchesThisRound = 0;
 var deck = new Deck();
 var matchInfo = 0;
 var cards = document.querySelectorAll('.card');
-var userNameArray = [];
+var playerArray = JSON.parse(localStorage.getItem("playerArray")) || [];
 
 directionBtn.addEventListener('click', openDirections);
+hamburger.addEventListener('click', dropDown);
+
+function compare( a, b ) {
+  if ( a.secondsOnly < b.secondsOnly ){
+    return -1;
+  }
+  if ( a.secondsOnly > b.secondsOnly ){
+    return 1;
+  }
+  return 0;
+}
+
+function dropDown() {
+  playerArray.sort(compare);
+  scoreBoard.classList.toggle('show-score');
+  for (var i = 0; i < 5; i++) {
+    scoreBoard.innerHTML += `<p>${playerArray[i].name} ${playerArray[i].time}</p>`;
+  }
+}
 
 var min = 0;
 var second = 00;
@@ -50,12 +71,6 @@ function openDirections() {
   }
   countUp();
   startGame();
-  userNameArray.push(playerOneInput.value);
-  saveToStorage();
-}
-
-function saveToStorage() {
-    localStorage.setItem("userNameArray", JSON.stringify(userNameArray));
 }
 
 function startGame() {
@@ -97,7 +112,7 @@ function instantiateCards() {
 }
 
 function showCards() {
-  deck.shuffle(deck.cards);
+  // deck.shuffle(deck.cards);
   var cardNum = 0;
 for (var i = 0; i < deck.cards.length; i++) {
   cardNum++;
@@ -126,11 +141,11 @@ for (var i = 0; i < deck.cards.length; i++) {
     var cards = document.querySelectorAll('.card');
     cards.forEach(card => card.addEventListener('click', flipCard));
   }
+  countUp();
 }
 
 function flipCard(event) {
   var clickedCard = parseInt(event.target.parentNode.dataset.id);
-  console.log(clickedCard);
   if (deck.selectedCards.length === 2) {
     return;
   }
@@ -161,7 +176,6 @@ function checkIfMatch() {
     secondCard.addEventListener('click', flipCard);
     reverseFlip();
   }
-
 }
 
 function deleteMatches() {
@@ -170,9 +184,10 @@ function deleteMatches() {
     secondCard.classList.add('card-hide');
     deck.checkSelectedCards();
     if (deck.matchedCards.length === 10) {
-      endGameOptions();
+      displayGamePage();
+      endGame();
     }
-  }, 1500);
+  }, 1200);
 }
 
 function reverseFlip() {
@@ -180,17 +195,23 @@ function reverseFlip() {
     firstCard.classList.remove('flipped');
     secondCard.classList.remove('flipped');
     deck.checkSelectedCards();
-  }, 1500);
+  }, 1200);
 }
 
-function endGameOptions() {
+function endGame() {
+  addIdea();
+  second = 0;
+  min = 0;
+}
+
+function displayGamePage() {
   mainSection.style.justifyContent = '';
   mainSection.style.marginTop = '50px';
   mainSection.innerHTML = `
   <section class="end-section">
   <div class="congrats">
   <h1>Congratulations ${playerOneInput.value.toUpperCase()}!</h1>
-  <h3>It took you ${min} min ${second} sec!</h3>
+  <h3>It took you ${min} min and ${second} sec!</h3>
   <h4>Click below to play again!</h4>
   </div>
   <div class="start-over">
@@ -198,4 +219,20 @@ function endGameOptions() {
     <button class="new-game-btn" type="button" name="button">NEW GAME</button>
   </div>
   </section>`;
+  var newGameBtn = document.querySelector('.new-game-btn');
+  newGameBtn.addEventListener('click', newGame);
+}
+
+function addIdea() {
+  var player = new Player({
+    name: playerOneInput.value.toUpperCase(),
+    time: `${min} min and ${second} sec`,
+    secondsOnly: second,
+  });
+  playerArray.push(player);
+  player.saveToStorage(playerArray);
+}
+
+function newGame() {
+  openDirections();
 }
