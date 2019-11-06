@@ -11,6 +11,10 @@ var matchesThisRound = 0;
 var deck = new Deck();
 var matchInfo = 0;
 var cards = document.querySelectorAll('.card');
+var userNameArray = [];
+
+
+var seconds = 00;
 
 directionBtn.addEventListener('click', openDirections);
 
@@ -34,6 +38,12 @@ function openDirections() {
       `
   }
   startGame();
+  userNameArray.push(playerOneInput.value);
+  saveToStorage();
+}
+
+function saveToStorage() {
+    localStorage.setItem("userNameArray", JSON.stringify(userNameArray));
 }
 
 function startGame() {
@@ -76,26 +86,28 @@ function instantiateCards() {
 
 function showCards() {
   deck.shuffle(deck.cards);
+  var cardNum = 0;
 for (var i = 0; i < deck.cards.length; i++) {
+  cardNum++;
   var row1 = document.querySelector('.row1');
   var row2 = document.querySelector('.row2');
   var row3 = document.querySelector('.row3');
   if (i < 3) {
     row1.innerHTML += `
-    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
-    <img class="back-card" src="./assets/questionMark.jpg">
+    <div class="card card${cardNum}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
+    <img class="back-card" src="./assets/BeyCardBack.jpg">
     <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
     </div>`
   } else if (i < 7) {
     row2.innerHTML += `
-    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
-    <img class="back-card" src="./assets/questionMark.jpg">
+    <div class="card card${cardNum}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
+    <img class="back-card" src="./assets/BeyCardBack.jpg">
     <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
     </div>`
   } else if (i < 10) {
     row3.innerHTML += `
-    <div class="card card${deck.cards[i].matchInfo}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
-    <img class="back-card" src="./assets/questionMark.jpg">
+    <div class="card card${cardNum}" data-name="${deck.cards[i].matchInfo}" data-id="${deck.cards[i].id}">
+    <img class="back-card" src="./assets/BeyCardBack.jpg">
     <img class="front-card" src="./assets/bey${deck.cards[i].matchInfo}.jpg">
     </div>`
   }
@@ -165,7 +177,7 @@ function endGameOptions() {
   mainSection.innerHTML = `
   <section class="end-section">
   <div class="congrats">
-  <h1>Congratulations ${playerOneInput.value}!</h1>
+  <h1>Congratulations ${playerOneInput.value.toUpperCase()}!</h1>
   <h3>It took you a long time.</h3>
   <h4>Click below to play again!</h4>
   </div>
